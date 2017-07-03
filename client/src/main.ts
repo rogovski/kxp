@@ -1,6 +1,6 @@
 import * as Vue from 'vue';
 import VueRouter from 'vue-router';
-
+// import store from './store';
 import { HomeComponent } from './components/home';
 import { AboutComponent } from './components/about';
 import { ListComponent } from './components/list';

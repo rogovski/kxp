@@ -1,2 +1,6 @@
 _proto/
 client/node_modules/
+srvjob/commander_js/node_modules/
+srvjob/echo_py/*.pyc
+srvsync/fs_browser_py/*.pyc
+.DS_Store

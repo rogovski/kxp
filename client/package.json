@@ -30,16 +30,18 @@
     "test:debug": "cross-env NODE_ENV=development karma start karma.debug.js",
     "test:watch": "cross-env NODE_ENV=development karma start karma.unit.js --singleRun=false --auto-watch",
     "kxp:client:init": "cross-env NODE_ENV=development npm run sass && npm run copy:bs",
-    "kxp:client:devserver": "cross-env NODE_ENV=development pm2 start webpack-dev-server --name devserver -- --inline --hot",
-    "kxp:client:sasswatch": "cross-env NODE_ENV=development pm2 start node-sass --name sasswatch -- --watch --output ./src/css ./src/sass"
+    "kxp:client:devserver": "cross-env NODE_ENV=development pm2 start webpack-dev-server -s --name kxp_devserver -- --inline --hot",
+    "kxp:client:sasswatch": "cross-env NODE_ENV=development pm2 start node-sass -s --name kxp_sasswatch -- --watch --output ./src/css ./src/sass"
   },
   "dependencies": {
     "axios": "~0.15.3",
     "bootstrap": "~3.3.7",
+    "node-uuid": "^1.4.8",
     "vue": "~2.2.4",
     "vue-class-component": "~5.0.0",
     "vue-property-decorator": "~4.0.0",
-    "vue-router": "~2.3.0"
+    "vue-router": "~2.3.0",
+    "vuex": "^2.3.1"
   },
   "devDependencies": {
     "@types/mocha": "~2.2.40",
