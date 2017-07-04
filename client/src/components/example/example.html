@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <button @click="on_refetch_click" v-if="!is_fetching">REFETCH</button>    
+    </div>
+    <div class="row">
+        <div v-if="is_fetching">
+            <p>LOADING</p>
+        </div>
+        <div class="content col-md-4" v-else>
+            <hr />
+            <div v-for="obj in doc_objects">
+                <p>Ref: {{obj.ref}}</p>
+                <p>Description: {{obj.description || 'NONE'}}</p>
+                <p>Value: {{obj.value}}</p>
+                <hr />
+            </div>
+        </div>
+    </div>
+</div>
