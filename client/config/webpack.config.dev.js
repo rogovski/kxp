@@ -61,7 +61,10 @@ webpackConfig.devServer = {
 			changeOrigin: true
     },
     '/events': {
-      target: 'ws://localhost:8282',
+      target: 'ws://localhost:8484',
+			rewrite: function(req) {
+      	req.url = req.url.replace(/^/, '');
+      },
       changeOrigin: true,
       ws: true
     }

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import { connectWsRef, disconnectWsRef } from '../../runtime';
 
 @Component({
     template: require('./home.html')
@@ -10,4 +11,11 @@ export class HomeComponent extends Vue {
     repo: string = 'https://github.com/ducksoupdev/vue-webpack-typescript';
     mode: string = process.env.ENV;
 
+    mounted() {
+        connectWsRef();
+    }
+
+    beforeDestroy() {
+        disconnectWsRef();
+    }
 }
