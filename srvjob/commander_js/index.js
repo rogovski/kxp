@@ -49,6 +49,7 @@ app.use('/static', express.static('static'));
  */
 app.use(morgan('dev'));
 
+
 /**
  * socket
  */
@@ -73,6 +74,31 @@ io.on('connection', (socket) => {
  */
 app.get('/', (req, res) => {
   res.json({ message: 'ok' });
+});
+
+/**
+ * command
+ * there are two types of entities that can acccess this endpoint.
+ * users and workers. a command issuesd by a user creates a job id.
+ *
+ */
+function broadcast() {
+
+}
+
+app.post('/cmd/:id', (req, res) => {
+  // TODO: extract data from session
+  const id = req.params.id;
+  const payload = req.body;
+
+  if(_.has(payload, 'user_id')) {
+    // user. user wants to run a job
+    return res.json({ user_id: user_id, id: id, payload: payload });
+  }
+  else {
+    // worker. broadcast message to appropriate socket
+    return res.json({ user_id: user_id, id: id, payload: payload });
+  }
 });
 
 server.listen(8484, () => {
