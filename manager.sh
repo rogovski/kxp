@@ -103,7 +103,7 @@ function delete_fsbrowser {
 }
 
 function start_fsbrowser {
-  spushd ./srvsync/fs_browser_py
+  spushd ./srvcommand/server
     pm2 start launch.sh --name kxp_fsbrowser -s
   spopd
 }
@@ -119,7 +119,7 @@ function delete_ctrlserver {
 }
 
 function start_ctrlserver {
-  spushd ./srvjob/commander_js
+  spushd ./srvapi
     pm2 start index.js --name kxp_ctrlserver -s --watch
   spopd
 }

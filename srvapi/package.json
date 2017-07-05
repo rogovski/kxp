@@ -1,7 +1,7 @@
 {
-  "name": "commander_js",
+  "name": "srvapi",
   "version": "0.0.1",
-  "description": "control endpoint for async subsystem",
+  "description": "api endpoint",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon -e js,jsx,json -w index.js -x node ./index.js",
