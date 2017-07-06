@@ -82,23 +82,17 @@ app.get('/', (req, res) => {
  * users and workers. a command issuesd by a user creates a job id.
  *
  */
-function broadcast() {
-
+function broadcast(payload) {
+  _.forEach(socket_collection, s => {
+    s.emit('event_data', payload);
+  });
 }
 
-app.post('/cmd/:id', (req, res) => {
+app.post('/event', (req, res) => {
   // TODO: extract data from session
-  const id = req.params.id;
   const payload = req.body;
-
-  if(_.has(payload, 'user_id')) {
-    // user. user wants to run a job
-    return res.json({ user_id: user_id, id: id, payload: payload });
-  }
-  else {
-    // worker. broadcast message to appropriate socket
-    return res.json({ user_id: user_id, id: id, payload: payload });
-  }
+  broadcast(payload);
+  return res.json({ message: 'ok' });
 });
 
 server.listen(8484, () => {
