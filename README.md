@@ -1,4 +1,17 @@
+# About
+
+kitchen sink
+
 # todo
+
+kxp hidden file structure
+types for:
+* scatterplot
+* csv table
+* column type analysers (off load to pandas perhaps?)
+* local pip installs (really dont want to break anything)
+
+# done
 
 make sinewave generator as worker
 

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import store from './store';
 import { HomeComponent } from './components/home';
 import { ExampleComponent } from './components/example';
+import { BounceComponent } from './components/bounce';
 import { AboutComponent } from './components/about';
 import { ListComponent } from './components/list';
 import { NavbarComponent } from './components/navbar';
@@ -14,6 +15,7 @@ let router = new VueRouter({
   routes: [
     { path: '/', component: HomeComponent },
     { path: '/example', component: ExampleComponent },
+    { path: '/bounce', component: BounceComponent },
     { path: '/about', component: AboutComponent },
     { path: '/list', component: ListComponent },
   ]

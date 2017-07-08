@@ -27,6 +27,6 @@ while True:
     cnt += 1
     if cnt >= 100:
         cnt = 0
-    time.sleep(0.5)
+    time.sleep(0.1)
 
 # connection.close()
