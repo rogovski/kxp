@@ -36,7 +36,6 @@ function delete_redis {
 
 function start_redis {
   pm2 start docker --name kxp_redis -s -- run -i --rm -p 6379:6379 redis
-  # pm2 start bin/docker_run_redis.sh --name kxp_redis -s
 }
 
 # bus
@@ -51,7 +50,6 @@ function delete_bus {
 
 function start_bus {
   pm2 start docker --name kxp_bus -s -- run -i --rm --hostname bushost -p 5672:5672 --name bus rabbitmq:3
-  # pm2 start bin/docker_run_rabbitmq.sh --name kxp_bus -s
 }
 
 # init webserver (copy bootstrap, run sass once)
