@@ -4,6 +4,7 @@ import createLogger from 'vuex/dist/logger';
 import { getWsRef } from '../runtime';
 import example from './modules/example';
 import bounce from './modules/bounce';
+import sine3d from './modules/sine3d';
 import cliws from './plugins/global_ws';
 
 Vue.use(Vuex);
@@ -28,7 +29,8 @@ function loadPlugins() {
 export default new Vuex.Store({
   modules: {
     example,
-    bounce
+    bounce,
+    sine3d
   },
   strict: debug,
   plugins: loadPlugins()
