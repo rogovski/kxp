@@ -164,7 +164,30 @@ function delete_ctrlserver {
 
 function start_ctrlserver {
   spushd ./srvapi
-    pm2 start index.js --name kxp_ctrlserver -s --watch
+    # pm2 start index.js --name kxp_ctrlserver -s --watch
+    pm2 start npm --name kxp_ctrlserver -s -- run dev
+  spopd
+}
+
+# client utils
+
+function make_component {
+  spushd ./client/src/components
+    mkdir $1
+    # touch $1/$1.html
+    # touch $1/$1.ts
+    # touch $1/$1.scss
+    # touch $1/index.ts
+    PREFIX=$1
+    cat ~/.kxp/templates/client_component/component.html | sed \
+      -e "s|{{prefix}}|${PREFIX}|g" \
+      > $PREFIX/$PREFIX.html
+    cat ~/.kxp/templates/client_component/component.ts | sed \
+      -e "s|{{prefix}}|${PREFIX}|g" \
+      > $PREFIX/$PREFIX.ts
+    cat ~/.kxp/templates/client_component/index.ts | sed \
+      -e "s|{{prefix}}|${PREFIX}|g" \
+      > $PREFIX/index.ts
   spopd
 }
 
@@ -172,6 +195,8 @@ VERBOSE=0
 LAUNCH=""
 STOPPROC=""
 DELPROC=""
+CREATE=""
+CREATE_COMP=""
 
 while : 
 do
@@ -191,6 +216,24 @@ do
         exit
       fi
       LAUNCH=$2
+      shift
+      shift
+			break
+			;;
+		-c|--create)
+      if [ -z "$2" ]
+      then
+        echo "create: please provide a key"
+        exit
+      fi
+      if [ -z "$3" ]
+      then
+        echo "create: please provide a name"
+        exit
+      fi
+      CREATE=$2
+      CREATE_COMP=$3
+      shift
       shift
       shift
 			break
@@ -256,7 +299,7 @@ then
       echo "warming up cache, dal, and messaging infrastructure."
       echo "please be patient."
       echo "WARNING: sleep period is hardcoded in manager.sh"
-      sleep 25
+      # sleep 25
       start_ctrlserver
       start_devserver_init > /dev/null 2>&1
       DEVSRV_STAT=$(pm2 list | grep "kxp_devserver")
@@ -279,6 +322,16 @@ then
       ;;
     *)
       echo "other"
+      exit
+      ;;
+  esac
+fi
+
+if [ ! -z "$CREATE" ]
+then
+  case $CREATE in
+    macomp)
+      make_component $CREATE_COMP
       exit
       ;;
   esac
