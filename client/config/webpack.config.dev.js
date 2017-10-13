@@ -18,6 +18,13 @@ webpackConfig.devServer = {
       },
 			changeOrigin: true
     },
+    '/pix2pix': {
+      target: 'http://localhost:8484',
+			rewrite: function(req) {
+      	req.url = req.url.replace(/^/, '');
+      },
+			changeOrigin: true
+    },
     '/auth': {
       target: 'http://localhost:8282',
 			rewrite: function(req) {

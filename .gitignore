@@ -1,6 +1,7 @@
 _proto/
 client/node_modules/
 srvapi/node_modules
+srvapi/.env
 srvcommand/simple_echo/*.pyc
 srvcommand/server/*.pyc
 .DS_Store

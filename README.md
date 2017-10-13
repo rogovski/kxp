@@ -11,6 +11,9 @@ types for:
 * column type analysers (off load to pandas perhaps?)
 * local pip installs (really dont want to break anything)
 
+pix2pix facades demo:
+* create 256 bg image in redis
+
 # done
 
 make sinewave generator as worker

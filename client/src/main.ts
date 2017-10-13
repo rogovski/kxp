@@ -7,13 +7,15 @@ import { BounceComponent } from './components/bounce';
 import { AboutComponent } from './components/about';
 import { ListComponent } from './components/list';
 import { NavbarComponent } from './components/navbar';
+import { Pix2pixFacadesComponent } from './components/pix2pix_facades';
 
 // register the plugin
 Vue.use(VueRouter);
 
 let router = new VueRouter({
   routes: [
-    { path: '/', component: HomeComponent },
+    { path: '/', component: Pix2pixFacadesComponent },
+    { path: '/home2', component: HomeComponent },
     { path: '/example', component: ExampleComponent },
     { path: '/bounce', component: BounceComponent },
     { path: '/about', component: AboutComponent },

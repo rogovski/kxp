@@ -1,3 +1,13 @@
+import EventEmitter from 'events';
+
+let bus_instance = null;
+export function getBusRef() {
+  if (bus_instance === null) {
+    bus_instance = new EventEmitter();
+  }
+  return bus_instance;
+}
+
 let ws_instance = (<any>window).io({ path: '/events', autoConnect: false });
 
 export function getWsRef() {

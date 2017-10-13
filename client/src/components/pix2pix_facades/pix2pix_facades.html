@@ -1,0 +1,20 @@
+<div>
+  <div class="col-xs-6">
+    <p>editor pane</p>
+    <FacadeSelector :selectedArchComponent="selectedArchComponent" />
+    <button class="btn" @click="onClearClick">Clear</button>
+
+    <div class="facade-draw-container">
+      <div class="pointer-mask" 
+           :style="box_mask_dims" 
+           v-pointer_mask="pointer_mask_binding" />
+
+      <ArchComponent 
+           v-for="data in drawnComponents"
+           :data="data" />
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <p>render pane</p>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-//require('dotenv').config();
+require('dotenv').config();
 
 const express = require('express');
 const http = require('http');
@@ -13,25 +13,12 @@ const fs = promise.promisifyAll(require('fs'));
 const _ = require('lodash');
 const ioCons = require('socket.io');
 const redis = require('redis');
+const container = require('./container');
+const pix2pixFacadesRouteCtor = require('./src/routes/pix2pix/facades');
 
 const app = express();
 const server = http.Server(app);
 const io = ioCons(server, { path: '/events' });
-
-/**
- * setup redis to use bluebird
- */
-promise.promisifyAll(redis.RedisClient.prototype);
-promise.promisifyAll(redis.Multi.prototype);
-
-/**
- * initialize redis client
- */
-const redisClient = redis.createClient({
-  host: 'localhost',
-  port: 6379,
-  detect_buffers: true
-});
 
 /**
  * enable json encoded bodies
@@ -95,6 +82,17 @@ app.post('/event', (req, res) => {
   return res.json({ message: 'ok' });
 });
 
-server.listen(8484, () => {
-  console.log('SERVER RUNNING: ', 8484);
+const pix2pixFacadesRoute = pix2pixFacadesRouteCtor(container);
+
+app.use('/pix2pix/facades', pix2pixFacadesRoute);
+
+container.initialize((err) => {
+  if(err) {
+    process.exit(1);
+  }
+  else {
+    server.listen(container.store.srvPort, () => {
+      console.log('SERVER RUNNING: ', container.store.srvPort);
+    });
+  }
 });
